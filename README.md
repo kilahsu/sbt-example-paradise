@@ -1,7 +1,21 @@
-### An example SBT project which uses [macro paradise](http://docs.scala-lang.org/overviews/macros/paradise.html) (Scala 2.10/2.11 with the macro paradise plugin, SBT 0.13)
+A project modified from the [Macro Paradise Example](https://github.com/scalamacros/sbt-example-paradise) to demonstrate issue of reading class member annotations during macro expension
 
-To verify that everything works fine, do `sbt run`.
+The macro expends a companion object based on the annotations added to the class.
 
-Note that currently SBT doesn't support recompilation of macro clients if the dependencies of the macro implementation have changed - macro clients are only recompiled when the macro definition itself is:  https://github.com/sbt/sbt/issues/399.
+When run with Scala 2.11.12, `sbt run` returns the following
 
-Huge thanks to Paul Butcher (https://github.com/paulbutcher/ScalaMock/blob/typemacros/project/Build.scala) and Adam Warski (https://github.com/adamw/scala-macro-debug) whose SBT projects I used as prototypes for this one.
+```
+[info] Running Test 
+john: Sad
+lisa: Happy, Laugh
+ben: 
+``` 
+
+However, when running with Scala 2.12.10, `sbt run` returns the following
+
+```
+[info] Running Test 
+john: 
+lisa: 
+ben:
+```
